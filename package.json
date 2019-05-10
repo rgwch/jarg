@@ -1,36 +1,22 @@
 {
   "name": "resticcio",
-  "productName": "Resticcio",
   "version": "0.1.0",
-  "description": "",
-  "license": "MIT",
-  "repository": "user/repo",
-  "author": {
-    "name": "rgwch",
-    "email": "weirich@elexis.ch",
-    "url": ""
-  },
+  "description": "Yet another Restic GUI",
+  "main": "main.js",
   "scripts": {
-    "test": "xo",
     "start": "electron .",
-    "build": "electron-packager . --out=dist --asar --overwrite --all"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "build":{
-    "appId": "Resticcio"
+  "repository": {
+    "type": "git",
+    "url": "ssh://vgit:/home/gerry/resticcio"
   },
-  "dependencies": {
-    "electron-debug": "^2.0.0"
-  },
+  "keywords": [
+    "restic"
+  ],
+  "author": "rgwch",
+  "license": "ISC",
   "devDependencies": {
-    "devtron": "^1.4.0",
-    "electron-packager": "^12.1.0",
-    "electron": "^2.0.2",
-    "xo": "^0.21.1"
-  },
-  "xo": {
-    "envs": [
-      "node",
-      "browser"
-    ]
+    "electron": "^5.0.1"
   }
 }
