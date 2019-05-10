@@ -1,19 +1,22 @@
 {
-  "name": "app",
-  "productName": "App",
-  "version": "0.0.0",
+  "name": "resticcio",
+  "productName": "Resticcio",
+  "version": "0.1.0",
   "description": "",
   "license": "MIT",
   "repository": "user/repo",
   "author": {
-    "name": "",
-    "email": "",
+    "name": "rgwch",
+    "email": "weirich@elexis.ch",
     "url": ""
   },
   "scripts": {
     "test": "xo",
     "start": "electron .",
     "build": "electron-packager . --out=dist --asar --overwrite --all"
+  },
+  "build":{
+    "appId": "Resticcio"
   },
   "dependencies": {
     "electron-debug": "^2.0.0"

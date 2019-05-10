@@ -51,3 +51,8 @@ app.on('ready', () => {
 	mainWindow = createMainWindow();
 	const m=createMainMenu()
 });
+
+function toggle(name){
+	console.log("toggle "+name)
+	document.getElementById(name).display="block"
+}
