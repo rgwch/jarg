@@ -3,13 +3,32 @@
 
 <head>
 	<meta charset="utf-8">
+	<link rel="stylesheet" href="assets/style.css">
 	<title>Jarg - Just another Restic GUI</title>
 </head>
 
 <body>
+
 	<h1>Jarg</h1>
+	<div>
+		<table>
+			<tr>
+				<td class="select" onclick="toggle('repo')">Repository:</td>
+				<td class="value" id="disp_reponame"></td>
+			</tr>
+			<tr id="repo" style="display:none">
+				<td class="label">Name</td>
+				<td><input type="text" name="reponame" id="reponame"></td>
+			</tr>
+			<tr>
+				<td class="select">Directories</td>
+				<td class="value"></td>
+			</tr>
+		</table>
+	</div>
+	<a href="#" onclick="init('testrepo','abcde')">Test it!</a>
 </body>
-<script>
-	require('./renderer')
+<script src="renderer.js">
+
 </script>
 </html>

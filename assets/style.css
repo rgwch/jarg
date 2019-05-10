@@ -1,0 +1,10 @@
+.label{
+	font-weight: bold;
+}
+
+.select{
+	color: blue;
+}
+.select:hover{
+	color: red;
+}
