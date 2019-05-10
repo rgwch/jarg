@@ -11,8 +11,16 @@ createWindow=()=>{
 	win.on('closed',()=>{
 		win=null
 	})
+	win.on("resize",()=>{
+		resize(win.getBounds())
+	})
+	win.on("move", ()=>{
+		resize(win.getBounds())
+	})
 }
-
+resize=bounds=>{
+	console.log(bounds)
+}
 app.on("ready",createWindow)
 app.on("wondow-all-closed",()=>{
 	app.quit()
