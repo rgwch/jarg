@@ -7,4 +7,15 @@
 }
 .select:hover{
 	color: red;
+	cursor: pointer;
+}
+
+.container{
+	display: flex;
+	height: 300px;
+}
+
+.group{
+	padding-bottom: 4px;
+	margin-bottom: 4px;
 }

@@ -11,24 +11,44 @@
 
 	<h1>Jarg</h1>
 	<div>
-		<table>
-			<tr>
-				<td class="select" onclick="toggle('repo')">Repository:</td>
-				<td class="value" id="disp_reponame"></td>
-			</tr>
-			<tr id="repo" style="display:none">
-				<td class="label">Name</td>
-				<td><input type="text" name="reponame" id="reponame"></td>
-			</tr>
-			<tr>
-				<td class="select">Directories</td>
-				<td class="value"></td>
-			</tr>
-		</table>
+		<div class="group">
+			<span class="select" onclick="toggle('repo')">Repository:</span>
+			<span class="value" id="disp_reponame"></span>
+		</div>
+		<div id="repo" style="display:none">
+			<table>
+				<tr>
+					<td>Location/url:</td>
+					<td><input type="text" id="repourl"></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="text" id="repopwd"></td>
+				</tr>
+			</table>
+			<button>Save</button>
+		</div>
+		<div class="group">
+			<span class="select" onclick="toggle('dirs')">Directories:</span>
+			<span class="value" id=disp_dirs></span>
+			<div id="dirs" style="display:none">
+
+				Enter space separated list of directories to include:<br />
+				<input type="text" id="repodirs" style="width:100%">
+				<button>Save</button>
+			</div>
+		</div>
+
 	</div>
-	<a href="#" onclick="init('testrepo','abcde')">Test it!</a>
+	<hr>
+
+	<button onclick="backup()">Backup</button>
+	<button onclick="restore()">Restore</button>
+	<button onclick="list()">List</button>
+	<button onclick="init()">Initialize</button>
 </body>
 <script src="renderer.js">
 
 </script>
+
 </html>

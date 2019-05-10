@@ -1,18 +1,37 @@
-const exec = require('child_process').exec
+const {exec,spawn} = require('child_process')
+const path=require('path')
 const cfg = new (require('conf'))()
 
-const reponame=cfg.get("reponame") || "local"
-const repoaddress=cfg.get("repoaddr") || "~/restic_repo"
-const repopwd=cfg.get("repopwd") || "topsecret"
-const repodirs=cfg.get("repdirs") || __dirname
+let reponame = cfg.get("reponame") || "local"
+let repoaddress = (cfg.get("repoaddr") || "~/restic_repo").replace("~",require('os').homedir())
+let repopwd = cfg.get("repopwd") || "topsecret"
+let repodirs = cfg.get("repdirs") || __dirname
 
 
-const setValues=()=>{
-	let el=document.getElementById("disp_reponame")
-	el.textContent=reponame
-	el=document.getElementById("reponame")
-	el.value=reponame
-	console.log(el+", "+reponame)
+const setValues = () => {
+	let el = document.getElementById("disp_reponame")
+	el.textContent = reponame
+	el = document.getElementById("repourl")
+	el.value = repoaddress
+	el = document.getElementById('repopwd')
+	el.value = repopwd
+	el = document.getElementById("disp_dirs")
+	el.textContent = repodirs
+	el = document.getElementById('repodirs')
+	el.value = repodirs
+}
+
+const getValues = () => {
+	let el = document.getElementById("disp_reponame")
+	reponame = el.textContent = reponame
+	el = document.getElementById("repourl")
+	el.value = repoaddress
+	el = document.getElementById('repopwd')
+	el.value = repopwd
+	el = document.getElementById("disp_dirs")
+	el.textContent = repodirs
+	el = document.getElementById('repodirs')
+	el.value = repodirs
 }
 const callback = (err, stdout, stderr) => {
 	if (err) {
@@ -23,25 +42,44 @@ const callback = (err, stdout, stderr) => {
 	}
 }
 
-function toggle(elem){
-	const el=document.getElementById(elem)
-	if(el.style.display==="none"){
-		el.style.display="block"
-	}else{
-		el.style.display="none"
+function toggle(elem) {
+	const el = document.getElementById(elem)
+	if (el.style.display === "none") {
+		el.style.display = "block"
+	} else {
+		el.style.display = "none"
 	}
 }
 
-function init(repo, pwd) {
+function do_spawn(...cmd){
 	const env = Object.assign({}, process.env)
-	env.RESTIC_PASSWORD = pwd
-	exec(`restic init -r ${repo}`, { env }, callback);
+	env.RESTIC_PASSWORD = repopwd
+	const args=["-r",repoaddress,...cmd]
+	console.log(args)
+	const proc=spawn("restic",args,{env} )
+	proc.stdout.on('data',chunk=>{
+		console.log("stdout: "+chunk)
+	})
+	proc.stderr.on('data',err=>{
+		console.log("err: "+err)
+	})
+	proc.on("close",exitcode=>{
+		console.log("exit: "+exitcode)
+	})
+}
+function init(repo, pwd) {
+	const r = repo || repoaddress
+	const p = pwd || repopwd
+	const env = Object.assign({}, process.env)
+	env.RESTIC_PASSWORD = p
+	exec(`restic -r ${r} init`, { env }, callback);
 }
 
-function backup(repo, pwd, dirs) {
-	const env = Object.assign({}, process.env)
-	env.RESTIC_PASSWORD = pwd
-	exec(`restic -r ${repo} backup ${dirs}`, { env }, callback);
+function list(){
+	do_spawn("snapshots")
+}
+function backup() {
+	do_spawn("backup",repodirs)
 }
 
 function restore() {
