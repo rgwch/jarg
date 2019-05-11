@@ -42,7 +42,7 @@ function toggle(elem) {
 
 function do_spawn(...cmd) {
 	const vconsole=document.getElementById('console')
-	vconsole.value+=`\nCommand: ${cmd.join(" ")}\n`
+	vconsole.value+=`\nCommand: restic -r ${set.repoaddress} ${cmd.join(" ")}\n`
 	const env = Object.assign({}, process.env)
 	env.RESTIC_PASSWORD = set.repopwd
 	const args = ["-r", set.repoaddress, ...cmd]
@@ -51,10 +51,11 @@ function do_spawn(...cmd) {
 		vconsole.value+=chunk;
 	})
 	proc.stderr.on('data', err => {
-		console.log("err: " + err)
+		vconsole.value+="!!!! "+err
 	})
 	proc.on("close", exitcode => {
-		vconsole.value+=`\nExitcode: ${exitcode}\n----------------\n`
+		const x=exitcode===0 ? "no errors." : "Command returned error code: "+exitcode
+		vconsole.value+=`\n${x}\n----------------\n`
 		
 	})
 }
