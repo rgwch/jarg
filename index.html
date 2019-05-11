@@ -13,49 +13,58 @@
 	<hr />
 	<div class="container">
 		<div id="exec" class="panel" style="display:block">
-			<div style="margin-bottom:20px;">Backup-set:
-				<span style="font-weight: bold" class="disp_reponame"></span>
-				<img src="assets/add_icon.svg" width="24px;" style="float:right" title="new backup set">
-				<img src="assets/edit_icon.svg" width="24px;" style="float:right;" title="edit backup set">
+			<div style="margin-bottom:20px;">Backup setname:
+				<span style="font-weight: bold" id="setname"></span>
+				<img src="assets/edit_icon.svg" width="24px;" style="float:right;" title="edit backup set"
+					onclick="toggle()">
 			</div>
 			<div class="group">
 				<span class="select" onclick="toggle('repo')">Repository:</span>
 				<span class="value" id="disp_reponame"></span>
 			</div>
-			<div id="repo" style="display:none">
-				<table width="100%">
-					<tr>
-						<td>Location/url:</td>
-						<td><input type="text" id="repourl" style="width:100%"></td>
-					</tr>
-					<tr>
-						<td>Password:</td>
-						<td><input type="text" id="repopwd"></td>
-					</tr>
-				</table>
-				<button>Save</button>
-			</div>
 			<div class="group">
 				<span class="select" onclick="toggle('dirs')">Directories:</span>
 				<span class="value" id=disp_dirs></span>
-				<div id="dirs" style="display:none">
-
-					Enter space separated list of directories to include:<br />
-					<input type="text" id="repodirs" style="width:100%">
-					<button>Save</button>
-				</div>
 			</div>
-			<div id="edit" class="panel" style="display:none">
-				Test
-			</div>
-
 			<hr>
-
 			<button onclick="backup()">Backup</button>
 			<button onclick="restore()">Restore</button>
 			<button onclick="list()">List</button>
 			<button onclick="init()">Initialize</button>
 		</div>
+		<div id="edit" class="panel" style="display:none">
+			<img src="assets/back_arrow.svg" width="24px" style="float:right" title="back" onclick="toggle()">
+			<select id="setnames" onchange="changeset(event)">
+
+			</select>
+			<table width="100%">
+				<tr>
+					<td><label for="setname">Backup set name</label></td>
+					<td><input type="text" id="ed_setname" style="width:100%"></td>
+				</tr>
+				<tr>
+					<td width="30%"><label for="repourl">Location/url</label></td>
+					<td width="70%"><input type="text" id="repourl" style="width:100%"></td>
+				</tr>
+				<tr>
+					<td><label for="repopwd">Password</label></td>
+					<td><input type="text" id="repopwd" style="width:100%"></td>
+				</tr>
+				<tr>
+					<td><label for="repodirs">Directory</label></td>
+					<td><input type="text" id="repodirs" style="width:100%"></td>
+				</tr>
+				<tr>
+					<td><label for="s3key">S3 Key (if applicable)</label></td>
+					<td><input type="text" id="s3key" style="width:100%"></td>
+				</tr>
+				<tr>
+					<td><label for="s3secret">S3 Secret (if applicable)</label></td>
+					<td><input type="text" id="s3secret" style="width:100%"></td>
+				</tr>
+			</table>
+		</div>
+
 		<div class="panel">
 			<textarea id="console" readonly></textarea>
 		</div>
