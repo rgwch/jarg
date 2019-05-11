@@ -10,42 +10,47 @@
 <body>
 
 	<h1>Jarg</h1>
-	<div>
-		<div class="group">
-			<span class="select" onclick="toggle('repo')">Repository:</span>
-			<span class="value" id="disp_reponame"></span>
-		</div>
-		<div id="repo" style="display:none">
-			<table>
-				<tr>
-					<td>Location/url:</td>
-					<td><input type="text" id="repourl"></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type="text" id="repopwd"></td>
-				</tr>
-			</table>
-			<button>Save</button>
-		</div>
-		<div class="group">
-			<span class="select" onclick="toggle('dirs')">Directories:</span>
-			<span class="value" id=disp_dirs></span>
-			<div id="dirs" style="display:none">
-
-				Enter space separated list of directories to include:<br />
-				<input type="text" id="repodirs" style="width:100%">
+	<div class="container">
+		<div class="panel">
+			<div class="group">
+				<span class="select" onclick="toggle('repo')">Repository:</span>
+				<span class="value" id="disp_reponame"></span>
+			</div>
+			<div id="repo" style="display:none">
+				<table width="100%">
+					<tr>
+						<td>Location/url:</td>
+						<td><input type="text" id="repourl" style="width:100%"></td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><input type="text" id="repopwd"></td>
+					</tr>
+				</table>
 				<button>Save</button>
 			</div>
+			<div class="group">
+				<span class="select" onclick="toggle('dirs')">Directories:</span>
+				<span class="value" id=disp_dirs></span>
+				<div id="dirs" style="display:none">
+
+					Enter space separated list of directories to include:<br />
+					<input type="text" id="repodirs" style="width:100%">
+					<button>Save</button>
+				</div>
+			</div>
+
+			<hr>
+
+			<button onclick="backup()">Backup</button>
+			<button onclick="restore()">Restore</button>
+			<button onclick="list()">List</button>
+			<button onclick="init()">Initialize</button>
 		</div>
-
+		<div class="panel">
+			<textarea id="console" readonly></textarea>
+		</div>
 	</div>
-	<hr>
-
-	<button onclick="backup()">Backup</button>
-	<button onclick="restore()">Restore</button>
-	<button onclick="list()">List</button>
-	<button onclick="init()">Initialize</button>
 </body>
 <script src="renderer.js">
 
