@@ -10,8 +10,14 @@
 <body>
 
 	<h1>Jarg</h1>
+	<hr />
 	<div class="container">
-		<div class="panel">
+		<div id="exec" class="panel" style="display:block">
+			<div style="margin-bottom:20px;">Backup-set:
+				<span style="font-weight: bold" class="disp_reponame"></span>
+				<img src="assets/add_icon.svg" width="24px;" style="float:right" title="new backup set">
+				<img src="assets/edit_icon.svg" width="24px;" style="float:right;" title="edit backup set">
+			</div>
 			<div class="group">
 				<span class="select" onclick="toggle('repo')">Repository:</span>
 				<span class="value" id="disp_reponame"></span>
@@ -38,6 +44,9 @@
 					<input type="text" id="repodirs" style="width:100%">
 					<button>Save</button>
 				</div>
+			</div>
+			<div id="edit" class="panel" style="display:none">
+				Test
 			</div>
 
 			<hr>
