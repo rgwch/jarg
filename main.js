@@ -1,6 +1,8 @@
 
 /**
- * Thos is the code for the "main" Thread of electron 
+ * This is the code for the "main" Thread of electron 
+ * Cooyright (c) 2019 by G. Weirich
+ * License and terms: See LICENSE
  */
 const { app, BrowserWindow, Menu } = require('electron')
 const cfg = new (require('electron-store'))()

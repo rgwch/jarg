@@ -1,5 +1,7 @@
 /**
- * This is the code for the "renderer" thread of the electron app
+ * This is the code for the "renderer" thread of the electron app.
+ * Copyright (c) 2019 by G. Weirich
+ * License and terms: see LICENSE
  */
 
 const { spawn } = require('child_process')
