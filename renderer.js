@@ -108,7 +108,7 @@ function save() {
 		inp.value = ""
 		inp.style.display = "none"
 	} else {
-		alert("Please enter a name for this backupset")
+		alert("Please enter a name for this backup  profile")
 		inp.focus()
 	}
 }

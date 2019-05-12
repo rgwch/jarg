@@ -2,7 +2,7 @@
 /**
  * Thos is the code for the "main" Thread of electron 
  */
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
 const cfg = new (require('electron-store'))()
 
 let win;
@@ -33,7 +33,8 @@ createWindow = () => {
 resize = bounds => {
 	cfg.set("bounds", bounds)
 }
+Menu.setApplicationMenu(null)
 app.on("ready", createWindow)
-app.on("wondow-all-closed", () => {
+app.on("window-all-closed", () => {
 	app.quit()
 })
