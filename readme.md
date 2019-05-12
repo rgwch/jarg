@@ -20,7 +20,7 @@ Jarg is a small [electron](https://electronjs.org) app which does not more than 
 ## Installation
 
 * Install [restic](https://restic.readthedocs.io/en/stable/020_installation.html) for your operating system
-* Download Jarg for your operating system from the [releases page](https://github.com/rgwch/jarg/releases/edit/0.2.0Beta). *.dmg for macOS, *.appimage for Linux, *.exe for Windows (all 64 Bit only). 
+* Download Jarg for your operating system from the [releases page](https://github.com/rgwch/jarg/releases/tag/0.2.0Beta). *.dmg for macOS, *.appimage for Linux, *.exe for Windows (all 64 Bit only). 
 
 ## Concepts
 
