@@ -2,7 +2,7 @@
 
 ## What is it?
 
-As the name implies, this is a graphical user interface for the backup tool "[restic](https://restic.net)". Restic is a great deduplicating, encrypting backup tool with quite a few possible backup destinations, such as 
+As the name implies, this is a graphical user interface for the backup tool "[restic](https://restic.net)". Restic is a great deduplicating, encrypting backup tool with quite a few possible storage backends, such as 
 
 * Local directory
 * sftp
@@ -14,7 +14,7 @@ As the name implies, this is a graphical user interface for the backup tool "[re
 * Google Cloud Storage
 
 While restic is great for batch usage, the commands are somewhat tedious to remember and enter id you  want to use it manually. That's where Jarg comes in:
-Jarg is a small electron app which does not more than hide the restic commandline behind an easy to use graphical tool. So you need restic installed in order to use Jarg.
+Jarg is a small [electron](https://electronjs.org) app which does not more than hide the restic commandline behind an easy to use graphical tool. So you need restic installed in order to use Jarg.
 
 ## Installation
 

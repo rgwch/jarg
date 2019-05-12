@@ -3,7 +3,7 @@
  * Thos is the code for the "main" Thread of electron 
  */
 const { app, BrowserWindow } = require('electron')
-const cfg = new (require('conf'))()
+const cfg = new (require('electron-store'))()
 
 let win;
 

@@ -1,7 +1,8 @@
 {
   "name": "jarg",
-  "version": "0.1.0",
-  "description": "Yet another Restic GUI",
+  "productName": "Jarg",
+  "version": "0.2.0",
+  "description": "Just another Restic GUI",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -17,9 +18,11 @@
   "author": "rgwch",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^5.0.1"
+    "electron": "^5.0.1",
+    "electron-packager": "^13.1.1"
   },
   "dependencies": {
-    "conf": "^4.0.2"
+    "electron-store": "^3.2.0",
+    "fix-path": "^2.1.0"
   }
 }

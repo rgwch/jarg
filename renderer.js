@@ -3,7 +3,10 @@
  */
 
 const { spawn } = require('child_process')
-const cfg = new (require('conf'))()
+const { dialog } = require('electron').remote
+const fixPath = require('fix-path');
+const Conf = require('electron-store')
+const cfg = new Conf()
 /* Load the configuration data */
 let setname = cfg.get("set") || "default"
 let set = Object.assign({}, {
@@ -14,6 +17,8 @@ let set = Object.assign({}, {
 }, cfg.get(setname))
 cfg.set(set.name, set)
 cfg.set("set", set.name)
+let restic = cfg.get("restic") || "restic"
+fixPath()
 
 /**
  * Set the GUI display to nthe values stored in the configuration
@@ -37,7 +42,7 @@ const setValues = () => {
 	el.value = set.s3secret
 	el = document.getElementById('setnames')
 	const store = cfg.store
-	const sel=el.selectedIndex
+	const sel = el.selectedIndex
 	for (k in store) {
 		const o = store[k]
 		if (typeof (o) === 'object' && o.name) {
@@ -45,9 +50,9 @@ const setValues = () => {
 		}
 	}
 	addOption("new...", "new...")
-	for(let i=0;i<el.options.length;i++){
-		if(el.options[i].text === setname){
-			el.options.selectedIndex=i
+	for (let i = 0; i < el.options.length; i++) {
+		if (el.options[i].text === setname) {
+			el.options.selectedIndex = i
 		}
 	}
 	function addOption(n) {
@@ -87,15 +92,15 @@ const getValues = () => {
  */
 function save() {
 	const inp = document.getElementById("newsetname")
-	setname=inp.value
+	setname = inp.value
 	if (setname) {
-		set.name=setname
-		cfg.set("set",setname)
+		set.name = setname
+		cfg.set("set", setname)
 		getValues()
 		toggle()
 		setValues()
-		inp.value=""
-		inp.style.display="none"
+		inp.value = ""
+		inp.style.display = "none"
 	} else {
 		alert("Please enter a name for this backupset")
 		inp.focus()
@@ -126,7 +131,7 @@ function changeset() {
 		set = cfg.get(backupset)
 		setname = backupset
 		document.getElementById("newsetname").style.display = "none"
-		cfg.set("set",setname)
+		cfg.set("set", setname)
 	}
 	setValues()
 }
@@ -155,7 +160,16 @@ function do_spawn(...cmd) {
 	const env = Object.assign({}, process.env)
 	env.RESTIC_PASSWORD = set.repopwd
 	const args = ["-r", set.repoaddress, ...cmd]
-	const proc = spawn("restic", args, { env })
+	const proc = spawn(restic, args, { env })
+	proc.on("error", err => {
+		if (err.code == "ENOENT") {
+			dialog.showMessageBox({
+				type: "error",
+				title: "Restic not found",
+				message: "The restic executable was not found. Please make sure, restic is installed and on the Path."
+			})
+		}
+	})
 	proc.stdout.on('data', chunk => {
 		vconsole.value += chunk;
 	})
