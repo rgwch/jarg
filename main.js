@@ -14,6 +14,7 @@ createWindow = () => {
 		height: bounds.height,
 		x: bounds.x,
 		y: bounds.y,
+		icon: __dirname+"/assets/icon.png",
 		webPreferences: {
 			nodeIntegration: true
 		}

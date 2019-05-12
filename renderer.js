@@ -27,7 +27,7 @@ setValues()
 /**
  * Set the GUI display to the values stored in the configuration
  */
-const setValues = () => {
+function setValues(){
 	let el = document.getElementById("disp_reponame")
 	el.textContent = set.repoaddress
 	el = document.getElementById("setname")
@@ -75,7 +75,7 @@ const setValues = () => {
 /**
  * Get the selected/entered vakues from the GUI and store them in the configuration
  */
-const getValues = () => {
+function getValues(){
 	el = document.getElementById("repourl")
 	set.repoaddress = el.value
 	el = document.getElementById('repopwd')
@@ -165,6 +165,8 @@ function do_spawn(...cmd) {
 	vconsole.value += `\nCommand: restic -r ${set.repoaddress} ${cmd.join(" ")}\n`
 	const env = Object.assign({}, process.env)
 	env.RESTIC_PASSWORD = set.repopwd
+	env.AWS_ACCESS_KEY = set.s3key
+	env.AWS_SECRET_KEY= set.s3secret
 	const args = ["-r", set.repoaddress, ...cmd]
 	const proc = spawn(restic, args, { env })
 	proc.on("error", err => {
