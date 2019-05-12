@@ -37,21 +37,18 @@
 			<select id="setnames" onchange="changeset(event)">
 
 			</select>
+			<input type="text" length="30" id="newsetname" style="display:none">
 			<table width="100%">
 				<tr>
-					<td><label for="setname">Backup set name</label></td>
-					<td><input type="text" id="ed_setname" style="width:100%"></td>
-				</tr>
-				<tr>
-					<td width="30%"><label for="repourl">Location/url</label></td>
+					<td width="30%"><label for="repourl">Repository location/url</label></td>
 					<td width="70%"><input type="text" id="repourl" style="width:100%"></td>
 				</tr>
 				<tr>
-					<td><label for="repopwd">Password</label></td>
+					<td><label for="repopwd">Repository password</label></td>
 					<td><input type="text" id="repopwd" style="width:100%"></td>
 				</tr>
 				<tr>
-					<td><label for="repodirs">Directory</label></td>
+					<td><label for="repodirs">Directory to backup</label></td>
 					<td><input type="text" id="repodirs" style="width:100%"></td>
 				</tr>
 				<tr>
@@ -63,6 +60,7 @@
 					<td><input type="text" id="s3secret" style="width:100%"></td>
 				</tr>
 			</table>
+			<button onclick="save()">Save</button> 
 		</div>
 
 		<div class="panel">

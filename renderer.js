@@ -1,23 +1,28 @@
+/**
+ * This is the code for the "renderer" thread of the electron app
+ */
+
 const { spawn } = require('child_process')
 const cfg = new (require('conf'))()
-const setname = cfg.get("setname") || "default"
-const set = Object.assign({}, {
+/* Load the configuration data */
+let setname = cfg.get("set") || "default"
+let set = Object.assign({}, {
 	name: setname,
 	repoaddress: "~/restic_repo".replace("~", require('os').homedir()),
 	repopwd: "topsecret",
 	repodirs: __dirname
 }, cfg.get(setname))
-cfg.set(set.name,set)
-cfg.set("set",set.name)
+cfg.set(set.name, set)
+cfg.set("set", set.name)
 
+/**
+ * Set the GUI display to nthe values stored in the configuration
+ */
 const setValues = () => {
 	let el = document.getElementById("disp_reponame")
 	el.textContent = set.repoaddress
 	el = document.getElementById("setname")
 	el.textContent = setname
-	el = document.getElementById("ed_setname")
-	el.value = setname
-
 	el = document.getElementById("repourl")
 	el.value = set.repoaddress
 	el = document.getElementById('repopwd')
@@ -30,36 +35,105 @@ const setValues = () => {
 	el.value = set.s3key
 	el = document.getElementById("s3secret")
 	el.value = set.s3secret
-	el=document.getElementById('setnames')
-	const store=cfg.store
-	for(k in store){
-		const o=store[k]
-		if(typeof(o) === 'object' && o.name){
-			addOption(o.name,o)
+	el = document.getElementById('setnames')
+	const store = cfg.store
+	const sel=el.selectedIndex
+	for (k in store) {
+		const o = store[k]
+		if (typeof (o) === 'object' && o.name) {
+			addOption(o.name)
 		}
 	}
-	addOption("new...",{})
-	function addOption(n,o){
-		const option=document.createElement("option")
-		option.value=o
-		option.text=n
+	addOption("new...", "new...")
+	for(let i=0;i<el.options.length;i++){
+		if(el.options[i].text === setname){
+			el.options.selectedIndex=i
+		}
+	}
+	function addOption(n) {
+		for (let i = 0; i < el.options.length; i++) {
+			if (el.options[i].text === n) {
+				return
+			}
+		}
+		const option = document.createElement("option")
+		option.value = n
+		option.text = n
 		el.appendChild(option)
+
 	}
 }
-
+/**
+ * Get the selected/entered vakues from the GUI and store them in the configuration
+ */
 const getValues = () => {
-	let el = document.getElementById("disp_reponame")
-	set.repaddress = el.textContent
 	el = document.getElementById("repourl")
 	set.repoaddress = el.value
 	el = document.getElementById('repopwd')
 	set.repopwd = el.value
 	el = document.getElementById('repodirs')
 	set.repodirs = el.value
+	el = document.getElementById("s3key")
+	set.s3key = el.value
+	el = document.getElementById("s3secret")
+	set.s3secret = el.value
+	//el = document.getElementById('setnames')
+	cfg.set(setname, set)
 
 }
 
-function toggle(mode) {
+/**
+ * Save a new backup set
+ */
+function save() {
+	const inp = document.getElementById("newsetname")
+	setname=inp.value
+	if (setname) {
+		set.name=setname
+		cfg.set("set",setname)
+		getValues()
+		toggle()
+		setValues()
+		inp.value=""
+		inp.style.display="none"
+	} else {
+		alert("Please enter a name for this backupset")
+		inp.focus()
+	}
+}
+
+/**
+ * The user changed the backupt set in the <select> dropdown, Either it's the name of
+ * an existing backup set or the last entry, which is "new...". If so, we create a new backup set.
+ */
+function changeset() {
+	const sel = document.getElementById("setnames")
+	const backupset = sel.selectedOptions[0].value
+	if (backupset === "new...") {
+		set = {
+			name: "",
+			repoaddress: "",
+			repopwd: "",
+			s3key: "",
+			s3secret: "",
+			repodirs: ""
+		}
+		setname = ""
+		const inp = document.getElementById("newsetname")
+		inp.style.display = "inline"
+		inp.focus()
+	} else {
+		set = cfg.get(backupset)
+		setname = backupset
+		document.getElementById("newsetname").style.display = "none"
+		cfg.set("set",setname)
+	}
+	setValues()
+}
+/**
+ * The user clicked the icon to display either the execute panel or the edit panel
+ */
+function toggle() {
 	const exec = document.getElementById("exec")
 	const edit = document.getElementById("edit")
 	if (exec.style.display === "none") {
@@ -71,6 +145,10 @@ function toggle(mode) {
 	}
 }
 
+/**
+ * Run a restic-command 
+ * @param  {...any} cmd 
+ */
 function do_spawn(...cmd) {
 	const vconsole = document.getElementById('console')
 	vconsole.value += `\nCommand: restic -r ${set.repoaddress} ${cmd.join(" ")}\n`
