@@ -1,3 +1,4 @@
+<img src="build/icon.png" width="250px" align="right">
 # Jarg - Just another restic GUI
 
 ## What is it?
@@ -23,7 +24,7 @@ Jarg is a small [electron](https://electronjs.org) app which does not more than 
 
 ## Concepts
 
-Jarg maintains backup profile for each pair of backup repository location and source location. A backup profile containts the repository location, a password, a source directory and in case of AWS/Minio repositories an s3-key and an s3-secret.
+Jarg maintains backup profile for each pair of backup repository location and source location. A backup profile contains the repository location, a password, a source directory and in case of AWS/Minio repositories an s3-key and an s3-secret.
 
 ## Usage
 
