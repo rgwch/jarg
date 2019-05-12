@@ -13,15 +13,19 @@ let set = Object.assign({}, {
 	name: setname,
 	repoaddress: "~/restic_repo".replace("~", require('os').homedir()),
 	repopwd: "topsecret",
-	repodirs: __dirname
+	repodirs: __dirname,
+	s3key: "",
+	s3secret: ""
 }, cfg.get(setname))
 cfg.set(set.name, set)
 cfg.set("set", set.name)
 let restic = cfg.get("restic") || "restic"
 fixPath()
+setValues()
+
 
 /**
- * Set the GUI display to nthe values stored in the configuration
+ * Set the GUI display to the values stored in the configuration
  */
 const setValues = () => {
 	let el = document.getElementById("disp_reponame")
@@ -92,7 +96,9 @@ const getValues = () => {
  */
 function save() {
 	const inp = document.getElementById("newsetname")
-	setname = inp.value
+	if (inp.style.display == "inline") {
+		setname = inp.value
+	}
 	if (setname) {
 		set.name = setname
 		cfg.set("set", setname)
@@ -198,4 +204,3 @@ function restore() {
 	do_spawn("xrestore", "latest", "--target", set.repodirs)
 }
 
-setValues()

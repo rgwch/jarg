@@ -5,16 +5,16 @@
   "description": "Just another Restic GUI",
   "main": "main.js",
   "scripts": {
-   "start": "electron .",
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "electron-builder"
-	},
-	"build":{
-		"appId": "ch.rgw.jarg",
-		"mac":{
-			"category": "ch.rgw.tools"
-		}
-	},
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "ch.rgw.jarg",
+    "mac": {
+      "category": "ch.rgw.tools"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "ssh://vgit:/home/gerry/resticcio"
