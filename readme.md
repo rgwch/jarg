@@ -15,7 +15,7 @@ As the name implies, this is a graphical user interface for the backup tool "[re
 * Google Cloud Storage
 
 While restic is great for batch usage, the commands are somewhat tedious to remember and enter if you want to use it manually. That's where Jarg comes in:
-Jarg is a small [electron](https://electronjs.org) app which does not more than hide the restic commandline behind an easy to use graphical tool. So you first need restic installed in order to use Jarg.
+Jarg is a quite simple [electron](https://electronjs.org) app which does not more than hide the restic commandline behind an easy to use graphical tool. So you first need restic installed in order to use Jarg.
 
 ## Installation
 
@@ -67,7 +67,7 @@ When done, click save to store the new profile. Klick also save when you only sw
 
 ## Contribute
 
-Contributions are always welcome.
+Contributions are always welcome. 
 
 ## License
 
