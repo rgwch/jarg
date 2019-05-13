@@ -44,7 +44,7 @@ Choose an existing profile from the selection box or select "new..." and enter a
 
 Here an example for a [Minio](https://min.io) server in the local network.
 
-* Repository location: See the [restic documentation](https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html) for syntax. At this time, only local directory and S3 is supported by Jarg.
+* Repository location: See the [restic documentation](https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html) for syntax. 
 
 * Repository password: Anything you like.
 
@@ -61,12 +61,9 @@ When done, click save to store the new profile. Klick also save when you only sw
     git clone https://github.com/rgwch/jarg
     cd jarg
     npm install
-    npm start
+    npm start  (or 'npm run build' to create distributable)
 
-## Package
 
-    npm install -g electron-builder
-    npm run build
 
 ## Contribute
 
