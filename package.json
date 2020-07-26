@@ -1,36 +1,39 @@
 {
-  "name": "jarg",
-  "productName": "Jarg",
-  "version": "0.2.0",
-  "description": "Just another Restic GUI",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "electron-builder"
-  },
-  "build": {
-    "appId": "ch.rgw.jarg",
-    "mac": {
-      "category": "ch.rgw.tools"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rgwch/jarg"
-  },
-  "keywords": [
-    "restic","restic-gui"
-  ],
-  "author": "rgwch",
-  "license": "MIT",
-  "devDependencies": {
-    "electron": "^5.0.1",
-    "electron-builder": "^20.40.2",
-    "electron-packager": "^13.1.1"
-  },
-  "dependencies": {
-    "electron-store": "^3.2.0",
-    "fix-path": "^2.1.0"
-  }
+	"name": "jarg",
+	"productName": "Jarg",
+	"version": "0.2.0",
+	"description": "Just another Restic GUI",
+	"main": "main.js",
+	"scripts": {
+		"start": "electron .",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "electron-builder"
+	},
+	"build": {
+		"appId": "ch.rgw.jarg",
+		"mac": {
+			"category": "ch.rgw.tools",
+			"icon": "dist/.icon-icns/icon.icns",
+			"target": "pkg"
+		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/rgwch/jarg"
+	},
+	"keywords": [
+		"restic",
+		"restic-gui"
+	],
+	"author": "rgwch",
+	"license": "MIT",
+	"devDependencies": {
+		"electron": ">=7.2.4",
+		"electron-builder": "^20.40.2",
+		"electron-packager": "^13.1.1"
+	},
+	"dependencies": {
+		"electron-store": "^3.2.0",
+		"fix-path": "^2.1.0"
+	}
 }
