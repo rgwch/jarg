@@ -30,7 +30,7 @@
 	"devDependencies": {
 		"electron": ">=18.3.7",
 		"electron-builder": "^20.40.2",
-		"electron-packager": "^13.1.1"
+		"electron-packager": "^17.1.2"
 	},
 	"dependencies": {
 		"electron-store": "^3.2.0",
