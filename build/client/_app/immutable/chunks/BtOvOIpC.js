@@ -1,0 +1,1 @@
+import{aZ as o,Q as t,aX as c}from"./CM4ER8Vs.js";function f(e){throw new Error("https://svelte.dev/e/lifecycle_outside_component")}function u(e){t===null&&f(),o(()=>{const n=c(e);if(typeof n=="function")return n})}export{u as o};
